@@ -47,62 +47,159 @@ public class SimpleOrderTestCase implements TestCase {
 
     @Override
     public void run() {
-        openMainPage();
+        navigateTo(APPLICATION_URL);
+        mainPage();
         searchFor(ITEM_NAME);
         searchResultsFor(ITEM_NAME);
-
-        searchResultsPage.clickItem(ITEM_NAME);
-
-        itemPage.verifyPage();
-        itemPage.verifyItem(ITEM_NAME);
-
-        itemPage.inputQuantity(ITEM_QUANTITY);
-        itemPage.clickAddToCart();
-        itemPage.verifyCart();
-        itemPage.clickCartLink();
-
-        cartPage.verifyPage();
-        cartPage.clickCheckout();
-
-        checkoutPage.verifyPage();
-        checkoutPage.verifyStepOneAccount();
-        checkoutPage.selectStepOneGuestAccount();
-        checkoutPage.clickStepOneAccount();
-
-        checkoutPage.verifyStepTwoGuest();
-        checkoutPage.inputStepTwoGuestInfo(guestInformation);
-        checkoutPage.clickStepTwoGuest();
-
-        checkoutPage.verifyStepFourShipping();
-        checkoutPage.selectStepFourFlatShippingMethod();
-        checkoutPage.clickStepFourShipping();
-
-        checkoutPage.verifyStepFivePayment();
-        checkoutPage.selectStepFiveStepFivePaymentMethod();
-        checkoutPage.tickStepFiveTermAndConditionsCheckbox();
-        checkoutPage.clickStepFivePayment();
-
-        checkoutPage.verifyStepSixConfirm();
-        checkoutPage.clickStepSixConfirm();
-
-        orderSuccessPage.verifyPage();
-        orderSuccessPage.clickContinue();
+        clickOnItem(ITEM_NAME);
+        detailsFor(ITEM_NAME);
+        addQuantity(ITEM_QUANTITY);
+        clickAddToCart();
+        cartAddSuccess();
+        clickCartLink();
+        userCart();
+        clickCheckout();
+        stepOneAccount();
+        selectGuestAccount();
+        clickContinueOnAccountPanel();
+        stepTwoGuestInfo();
+        guestInformationForm();
+        clickContinueOnGuestInformationPanel();
+        stepFourShipping();
+        selectFlatShipping();
+        clickContinueOnShippingPanel();
+        stepFivePayment();
+        selectCodPayment();
+        checkTermsAndConditions();
+        clickContinueOnPaymentPanel();
+        stepSixConfirm();
+        clickContinueOnConfirmPanel();
+        orderSuccessPage();
+        clickContinueOnOrderSuccessPage();
 
         mainPage.verifyPage();
     }
 
-    public void openMainPage() {
-        webDriver.get(APPLICATION_URL);
+    public void navigateTo(final String url) {
+        webDriver.get(url);
+    }
+
+    public void mainPage() {
+        mainPage.verifyPage();
     }
 
     public void searchFor(final String item) {
-        mainPage.verifyPage();
         mainPage.inputSearch(item);
         mainPage.clickSearch();
     }
 
     public void searchResultsFor(final String item) {
         searchResultsPage.verifyPage();
-        searchResultsPage.verifyItem(ITEM_NAME);
+        searchResultsPage.verifyItem(item);
+    }
+
+    public void clickOnItem(final String item) {
+        searchResultsPage.clickItem(item);
+    }
+
+    public void detailsFor(final String item) {
+        itemPage.verifyPage();
+        itemPage.verifyItem(item);
+    }
+
+    public void addQuantity(final int quantity) {
+        itemPage.inputQuantity(quantity);
+    }
+
+    public void clickAddToCart() {
+        itemPage.clickAddToCart();
+    }
+
+    public void cartAddSuccess() {
+        itemPage.verifyCart();
+    }
+
+    public void clickCartLink() {
+        itemPage.clickCartLink();
+    }
+
+    public void userCart() {
+        cartPage.verifyPage();
+    }
+
+    public void clickCheckout() {
+        cartPage.clickCheckout();
+    }
+
+    public void checkoutPage() {
+        checkoutPage.verifyPage();
+    }
+
+    public void stepOneAccount() {
+        checkoutPage.verifyStepOneAccount();
+    }
+
+    public void selectGuestAccount() {
+        checkoutPage.selectStepOneGuestAccount();
+    }
+
+    public void clickContinueOnAccountPanel() {
+        checkoutPage.clickStepOneAccount();
+    }
+
+    public void stepTwoGuestInfo() {
+        checkoutPage.verifyStepTwoGuest();
+    }
+
+    public void guestInformationForm() {
+        checkoutPage.inputStepTwoGuestInfo(guestInformation);
+    }
+
+    public void clickContinueOnGuestInformationPanel() {
+        checkoutPage.clickStepTwoGuest();
+    }
+
+    public void stepFourShipping() {
+        checkoutPage.verifyStepFourShipping();
+    }
+
+    public void selectFlatShipping() {
+        checkoutPage.selectStepFourFlatShippingMethod();
+    }
+
+    public void clickContinueOnShippingPanel() {
+        checkoutPage.clickStepFourShipping();
+    }
+
+    public void stepFivePayment() {
+        checkoutPage.verifyStepFivePayment();
+    }
+
+    public void selectCodPayment() {
+        checkoutPage.selectStepFiveStepFivePaymentMethod();
+    }
+
+    public void checkTermsAndConditions() {
+        checkoutPage.tickStepFiveTermAndConditionsCheckbox();
+    }
+
+    public void clickContinueOnPaymentPanel() {
+        checkoutPage.clickStepFivePayment();
+    }
+
+    public void stepSixConfirm() {
+        checkoutPage.verifyStepSixConfirm();
+    }
+
+    public void clickContinueOnConfirmPanel() {
+        checkoutPage.clickStepSixConfirm();
+    }
+
+    public void orderSuccessPage() {
+        orderSuccessPage.verifyPage();
+    }
+
+    public void clickContinueOnOrderSuccessPage() {
+        orderSuccessPage.clickContinue();
     }
 }
